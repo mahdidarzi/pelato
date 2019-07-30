@@ -5,6 +5,7 @@ import { Actions } from 'react-native-router-flux';
 const {width:devicewidth ,height:deviceheight}=Dimensions.get('window');
 const PersianCalendarPicker = require('react-native-persian-calendar-picker');
 var moment = require('moment-jalaali')
+
 // moment().format('jYYYY/jM/jD');
  export default class lightbox extends React.Component {
     constructor(props) {

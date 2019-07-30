@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, Text, Item, Icon,Button,Container} from 'native-base';
 import {Image,StyleSheet} from "react-native";
-
 import { Actions } from 'react-native-router-flux';
 
 export default class DrawerLayout extends React.Component {

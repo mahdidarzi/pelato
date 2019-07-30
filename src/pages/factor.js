@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet,FlatList,AsyncStorage,WebView,Image,TouchableOpacity} from 'react-native';
 import {Container, Header, Right, Button, Content, Text, Left, Icon , View , Spinner,Input,Item,FooterTab,Footer,Body,Card,CardItem,} from 'native-base';
 import { Actions } from 'react-native-router-flux';
-
+import headerStyles from './../assets/styles/header'
 export default class factor extends Component {
 
    constructor(){
@@ -42,20 +42,17 @@ export default class factor extends Component {
   
     return (
         <Container style={{ backgroundColor : '#2d3436'}}>
- <Header   style={{ backgroundColor : '#34495e'}} androidStatusBarColor="#2c3e50" iosBarStyle="light-content">
-                       <Left style={{marginRight:10,marginLeft:5}}>
-                        <Icon  name="md-menu" onPress={() => Actions.drawerOpen() } style={{ color : 'white' , fontWeight : 500,fontSize:35,}}/>
+  <Header   style = {headerStyles.headersbackground} androidStatusBarColor="#2c3e50" iosBarStyle="light-content">
+                       <Left style={headerStyles.headerLeftStyle1}>
+                        <Icon  name="md-menu" onPress={() => Actions.drawerOpen() } style={headerStyles.drawerStlye}/>
                     </Left> 
-                    <Left style={{marginRight:30,marginLeft:-60}}>
-                    <Image  source={require('./../assets/image/pelatos.png')} />
+                    <Left style={headerStyles.headerLeftStyle2}>
+                    <Image  source={require('./../assets/image/pelatos.png')}  style={styles.backgroundImage}/>
                     </Left> 
-                    {/* <Right style={{marginLeft:10}}>
-                  <Text style={{color:'white',fontSize:14}}> پنل کاربری پلاتو</Text>
-                    </Right>  */}
-                       <Body style={{marginRight:0,marginLeft:-10}}><Text style={{color:'white',fontSize:22}}> پنل کاربری پلاتو</Text></Body>
-                    <Left style={{marginLeft:5,marginRight:-20}}>
-                          <View  style={{ backgroundColor : '#607D8B',width:40,height:40,borderRadius:20,marginTop:3,alignItems:'center'}}>
-                   <Icon  name='person'   style={{marginTop:5,color:'#00BCD4'}}/>
+                       <Body style={headerStyles.body}><Text style={headerStyles.bodyText}> پنل کاربری پلاتو</Text></Body>
+                    <Left style={headerStyles.headerLeftStyle3}>
+                          <View  style={headerStyles.personIconView}>
+                   <Icon  name='person'   style={headerStyles.iconPerson}/>
                        </View>
                     </Left> 
                       

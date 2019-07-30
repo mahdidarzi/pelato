@@ -2,7 +2,7 @@ import React from 'react';
 import { AsyncStorage , FlatList ,StyleSheet,Image} from 'react-native';
 import {Container, Header, Right, Button, Content, Text, Left, Icon , View , Spinner} from 'native-base';
 import { Actions } from 'react-native-router-flux';
-
+import headerStyles from './../assets/styles/header'
 export default class Home extends React.Component {
     constructor(){
         super();
