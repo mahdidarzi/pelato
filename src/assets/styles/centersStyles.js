@@ -1,5 +1,5 @@
 import {StyleSheet}  from 'react-native';
-export default  goodestCenterStyles = StyleSheet.create({
+export default  centersStyles = StyleSheet.create({
 containerbackground : {
     backgroundColor : '#2d3436'
 },

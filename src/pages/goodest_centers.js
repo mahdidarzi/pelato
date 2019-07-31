@@ -1,11 +1,10 @@
 import React from 'react';
-import { AsyncStorage , FlatList ,StyleSheet,Image,TouchableOpacity,BackHandler,ToastAndroid,ScrollView} from 'react-native';
-import {Container, Header, Right, Button, Content, Text, Left, Icon , View , Spinner,Input,Item,FooterTab,Footer,Body} from 'native-base';
-import {Actions,Drawer } from 'react-native-router-flux';
+import {FlatList, Image, TouchableOpacity, BackHandler, ToastAndroid, ScrollView} from 'react-native';
+import {Container, Header, Button, Text, Left, Icon , View , Spinner, FooterTab, Footer, Body} from 'native-base';
+import {Actions} from 'react-native-router-flux';
 import ImageSlider from 'react-native-image-slider';
 import headerStyles from './../assets/styles/header';
-import goodestCenterStyles from './../assets/styles/goodestCenterStyles';
-
+import centersStyles from '../assets/styles/centersStyles';
 export default class goodest_centers extends React.Component {
     constructor(props){
         super(props);
@@ -122,7 +121,7 @@ handleBackButton() {
         // console.log(this.state.part1[1].id[3]);
         return (
            
-            <Container style={goodestCenterStyles.containerbackground}>
+            <Container style={centersStyles.containerbackground}>
                 <Header   style = {headerStyles.headersbackground} androidStatusBarColor="#2c3e50" iosBarStyle="light-content">
                        <Left style={headerStyles.headerLeftStyle1}>
                         <Icon  name="md-menu" onPress={() => Actions.drawerOpen() } style={headerStyles.drawerStlye}/>
@@ -152,38 +151,38 @@ handleBackButton() {
                   renderItem={({item})=>
               
                 
-                    <View key={item.id} style={goodestCenterStyles.centerContainer}>
+                    <View key={item.id} style={centersStyles.centerContainer}>
 
-                    <View style={goodestCenterStyles.goodestCenterBox}>
-                  <Text style={goodestCenterStyles.goodestCenterBoxsText}>برترین مراکز</Text>
+                    <View style={centersStyles.goodestCenterBox}>
+                  <Text style={centersStyles.goodestCenterBoxsText}>برترین مراکز</Text>
               </View>
-<View style={goodestCenterStyles.imageView}>   
+<View style={centersStyles.imageView}>   
   {this._show_image_slider( item.images )}                  
  </View>
 <View key={item.id} style={{ padding : 10 , }}>                      
-  <Text note numberOfLines={2} style={goodestCenterStyles.centerNmae}>{item.name}</Text>
-  <Text note numberOfLines={2} style={goodestCenterStyles.ordinaryText}>نوع مرکز:پلاتو</Text>
-  <Text note  style={goodestCenterStyles.ordinaryText}> تعداد اتاق:{item.rooms.length}</Text>
-  <ScrollView style={goodestCenterStyles.propertiesView}>
-  <Text style={[goodestCenterStyles.ordinaryText,{color:'white'}]}>ویژگی ها</Text>
+  <Text note numberOfLines={2} style={centersStyles.centerNmae}>{item.name}</Text>
+  <Text note numberOfLines={2} style={centersStyles.ordinaryText}>نوع مرکز:پلاتو</Text>
+  <Text note  style={centersStyles.ordinaryText}> تعداد اتاق:{item.rooms.length}</Text>
+  <ScrollView style={centersStyles.propertiesView}>
+  <Text style={[centersStyles.ordinaryText,{color:'white'}]}>ویژگی ها</Text>
   <View style={{flexDirection:'row'}}>
-  {item.center_attribute.length>=1?<Text style={goodestCenterStyles.properties}>{item.center_attribute[0].name}</Text>:null}
-  {item.center_attribute.length>=2?<Text style={goodestCenterStyles.properties}>{item.center_attribute[1].name}</Text>:null}
-  {item.center_attribute.length>=3?<Text style={goodestCenterStyles.properties}>{item.center_attribute[2].name}</Text>:null}
-  {item.center_attribute.length>=4?<Text style={goodestCenterStyles.properties}>{item.center_attribute[3].name}</Text>:null}
-  {item.center_attribute.length>=5?<Text style={goodestCenterStyles.properties}>{item.center_attribute[4].name}</Text>:null}
+  {item.center_attribute.length>=1?<Text style={centersStyles.properties}>{item.center_attribute[0].name}</Text>:null}
+  {item.center_attribute.length>=2?<Text style={centersStyles.properties}>{item.center_attribute[1].name}</Text>:null}
+  {item.center_attribute.length>=3?<Text style={centersStyles.properties}>{item.center_attribute[2].name}</Text>:null}
+  {item.center_attribute.length>=4?<Text style={centersStyles.properties}>{item.center_attribute[3].name}</Text>:null}
+  {item.center_attribute.length>=5?<Text style={centersStyles.properties}>{item.center_attribute[4].name}</Text>:null}
 </View>
 <View style={{flexDirection:'row'}}>
-  {item.center_attribute.length>=6?<Text style={goodestCenterStyles.properties}>{item.center_attribute[5].name}</Text>:null}
-  {item.center_attribute.length>=7?<Text style={goodestCenterStyles.properties}>{item.center_attribute[6].name}</Text>:null}
-  {item.center_attribute.length>=8?<Text style={goodestCenterStyles.properties}>{item.center_attribute[7].name}</Text>:null}
-  {item.center_attribute.length>=9?<Text style={goodestCenterStyles.properties}>{item.center_attribute[8].name}</Text>:null}
-  {item.center_attribute.length>=10?<Text style={goodestCenterStyles.properties}>{item.center_attribute[9].name}</Text>:null}
+  {item.center_attribute.length>=6?<Text style={centersStyles.properties}>{item.center_attribute[5].name}</Text>:null}
+  {item.center_attribute.length>=7?<Text style={centersStyles.properties}>{item.center_attribute[6].name}</Text>:null}
+  {item.center_attribute.length>=8?<Text style={centersStyles.properties}>{item.center_attribute[7].name}</Text>:null}
+  {item.center_attribute.length>=9?<Text style={centersStyles.properties}>{item.center_attribute[8].name}</Text>:null}
+  {item.center_attribute.length>=10?<Text style={centersStyles.properties}>{item.center_attribute[9].name}</Text>:null}
 </View>
 </ScrollView>
-<Text note style = {goodestCenterStyles.ordinaryText}>{item.address}</Text>
-  <TouchableOpacity onPress={()=>Actions.date({id:item.id,description:item.description})}  style={goodestCenterStyles.btnreserve}>
-  <Text style={goodestCenterStyles.reserveText}>مشاهده و رزرو مرکز</Text>
+<Text note style = {centersStyles.ordinaryText}>{item.address}</Text>
+  <TouchableOpacity onPress={()=>Actions.date({id:item.id,description:item.description})}  style={centersStyles.btnreserve}>
+  <Text style={centersStyles.reserveText}>مشاهده و رزرو مرکز</Text>
 </TouchableOpacity>
 </View>
              
@@ -228,7 +227,7 @@ handleBackButton() {
       console.log(array_images);
       return(
 
-         <ImageSlider  style={goodestCenterStyles.imageSlider} images={array_images}
+         <ImageSlider  style={centersStyles.imageSlider} images={array_images}
                                          autoPlayWithInterval={2000}/> 
 
       )
