@@ -1,0 +1,103 @@
+import {StyleSheet}  from 'react-native';
+export default  goodestCenterStyles = StyleSheet.create({
+containerbackground : {
+    backgroundColor : '#2d3436'
+},
+goodestCenterBox : {
+    marginLeft : 60,
+    marginRight : 60,
+    marginBottom : 5,
+    marginTop : 5,
+    width : 250,
+    height : 30,
+    backgroundColor : 'gray',
+    paddingVertical : 10,
+    paddingHorizontal : 5,
+    borderRadius : 10,
+    alignItems : 'center',
+    borderWidth : 1.3,
+    borderColor : 'white',
+},
+goodestCenterBoxsText : {
+    color : '#fff',
+    fontSize : 18,
+    margin : -8,
+},
+imageView : {
+    borderWidth : 3,
+    borderColor : 'white',
+    borderRadius : 8,
+},
+centerNmae : {
+    marginLeft : 120,
+    marginRight : 120,
+    color : '#00cec9',
+    fontSize : 16,
+    color : 'white',
+    marginBottom : 8,
+    fontSize : 16,
+    marginLeft : 5,
+    marginTop : 5,
+},
+ordinaryText : {
+    color : 'white',
+    marginBottom : 8,
+    fontSize : 16,
+    marginLeft : 5,
+    marginTop : 5,
+},
+properties : {
+    backgroundColor : 'blue',
+    color : 'white',
+    marginLeft : 5,
+    padding : 3,
+    marginTop : 5,
+    borderRadius : 5,
+    borderColor : 'white',
+    borderWidth : 1,
+    padding : 5
+},
+propertiesView : {
+    width : '100%',
+    height : 100,
+    backgroundColor : '#34495e',
+    borderRadius : 10,
+    borderWidth : 1.8,
+    borderColor : 'white',
+},
+btnreserve : {
+    width : 300,
+    height : 30,
+    marginTop : 5,
+    backgroundColor : 'green',
+    paddingVertical : 10,
+    paddingHorizontal : 5,
+    borderRadius : 10,
+    alignItems : 'center',
+    borderWidth : 1.3,
+    borderColor : 'white',
+    marginLeft : 10,
+    marginRight : 10,
+},
+reserveText : {
+    color : '#fff',
+    alignItems : 'center',
+    fontSize : 16,
+    margin : -8
+},
+centerContainer : {
+    flex : 1,
+    margin : 5,
+    backgroundColor : '#2f3542',
+    elevation : 1,
+    shadowColor : '#000',
+    shadowOffset : { width : 0 , height: 20},
+    shadowOpacity : .2,
+},
+imageSlider : {
+    width :'100%',
+    height: 150,
+    marginTop:1,
+    borderRadius:8,  
+}
+})
