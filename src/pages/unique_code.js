@@ -23,7 +23,7 @@ export default class unique_code extends React.Component {
                         <Icon  name="md-menu" onPress={() => Actions.drawerOpen() } style={headerStyles.drawerStlye}/>
                     </Left> 
                     <Left style={headerStyles.headerLeftStyle2}>
-                    <Image  source={require('./../assets/image/pelatos.png')}  style={styles.backgroundImage}/>
+                    <Image  source={require('./../assets/image/pelatos.png')}/>
                     </Left> 
                        <Body style={headerStyles.body}><Text style={headerStyles.bodyText}> پنل کاربری پلاتو</Text></Body>
                     <Left style={headerStyles.headerLeftStyle3}>
