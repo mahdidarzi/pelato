@@ -28,7 +28,7 @@ export default class goodest_centers extends React.Component {
         return (
             <Container style = {centersStyles.containerbackground}>
                 <Header style = {headerStyles.headersbackground} androidStatusBarColor = "#2c3e50" iosBarStyle = "light-content">
-                       <Left style = {headerStyles.headerLeftStyle1}>
+                    <Left style = {headerStyles.headerLeftStyle1}>
                         <Icon  name = "md-menu" onPress={() => Actions.drawerOpen()} style = {headerStyles.drawerStlye}/>
                     </Left> 
                     <Left style = {headerStyles.headerLeftStyle2}>
@@ -38,13 +38,13 @@ export default class goodest_centers extends React.Component {
                     <Left style = {headerStyles.headerLeftStyle3}>
                       <View  style = {headerStyles.personIconView}>
                         <Icon  name = 'person'   style = {headerStyles.iconPerson}/>
-                       </View>
+                      </View>
                     </Left> 
                 </Header>
                 <FlatList
                    data = {this.state.goodestCenters}
                    ListEmptyComponent ={ () =>this.state.showSpiner == 0 ?<Spinner/>  : null}
-                   ListFooterComponent = {this.state.loading?null:< Spinner />}
+                  //  ListFooterComponent = {this.state.loading?null:< Spinner />}
                    ListFooterComponent = {this.renderFooter.bind(this)}
                    refreshing = {this.state.refreshing}
                    onRefresh = {this.handleRefresh.bind(this)}
@@ -65,7 +65,7 @@ export default class goodest_centers extends React.Component {
                       <Text note  style = {centersStyles.ordinaryText}> تعداد اتاق:{item.rooms.length}</Text>
                       <ScrollView style = {centersStyles.propertiesView}>
                         <Text style = {[centersStyles.ordinaryText,{color:'white'}]}>ویژگی ها</Text>
-                        {this.showProperties(item.center_attribute)}
+                        {this.showCentersProperties(item.center_attribute)}
                     </ScrollView>
                     <Text note style = {centersStyles.ordinaryText}>{item.address}</Text>
                       <TouchableOpacity onPress = {()=>Actions.date({id:item.id,description:item.description})} 
@@ -111,7 +111,7 @@ export default class goodest_centers extends React.Component {
          images = {array_images}autoPlayWithInterval={2000}/> 
       )
     }
-    showProperties(properties) {
+    showCentersProperties(properties) {
         return (
           <FlatList 
             style = {{flexDirection:'row'}}
@@ -140,7 +140,7 @@ export default class goodest_centers extends React.Component {
             })
         }
     }
-    async getCentersRequest() {
+    async getCentersRequest() { //q:async and await
         try {
             const { page } = this.state;
             var urls = `http://192.168.88.2:8000/api/v1/goodest_centers?page=${page}`;
@@ -167,19 +167,16 @@ export default class goodest_centers extends React.Component {
     }
     handleBackButton() {
       if(Actions.currentScene == 'goodest_centers') {
-        if (this.backBtnCount == 1 ) {
+        if (this.backBtnCount == 1) 
           BackHandler.exitApp();
-          this.backBtnCount = 2;
-          return; // exit
-      }   
       else if (this.backBtnCount == 0) {
         ToastAndroid.show("لطفا دوبار برای  خروج از برنامه کلیک کنید", ToastAndroid.SHORT);
-          this.backBtnCount++;
+        this.backBtnCount++;
           setTimeout(() => {
               if (this.backBtnCount != 2)
                   this.backBtnCount = 0;
           }, 2000)
-          return true;
+          return true;//q
       }
       }   
 }
