@@ -57,7 +57,7 @@ export default class goodest_centers extends React.Component {
                         <Text style = {centersStyles.goodestCenterBoxsText}>برترین مراکز</Text>
                     </View>
                     <View style = {centersStyles.imageView}>   
-                      {this.showImageSlider( item.images )}                  
+                      {this.showImgSlider( item.images )}                  
                     </View>
                     <View key = {item.id} style = {{ padding : 10 , }}>                      
                       <Text note numberOfLines = {2} style = {centersStyles.centerNmae}>{item.name}</Text>
@@ -96,20 +96,20 @@ export default class goodest_centers extends React.Component {
             </Container>
         )
     }
-    showImageSlider(images) {
-      array_images = [];
-      let defaultImage = 'http://learnenglishteens.britishcouncil.org/sites/teens/files/rs6095_thinkstockphotos-119692035_1-low.jpg';
+    showImgSlider(images) {
+      arrImgs = [];
+      let defaultImg = 'http://learnenglishteens.britishcouncil.org/sites/teens/files/rs6095_thinkstockphotos-119692035_1-low.jpg';
       if(images.length == 0){
-        array_images.push(defaultImage);
+        arrImgs.push(defaultImg);
       }
       for(let lopCounter = 0; lopCounter < images.length; lopCounter++)
       {
-        array_images.push(images[lopCounter].picture);
+        arrImgs.push(images[lopCounter].picture);
       }
       return(
          <ImageSlider 
          style = {centersStyles.imageSlider} 
-         images = {array_images}autoPlayWithInterval={2000}/> 
+         images = {arrImgs}autoPlayWithInterval={2000}/> 
       )
     }
     showCentersProps(CentersProps) {
