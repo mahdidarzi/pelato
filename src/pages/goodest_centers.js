@@ -63,9 +63,9 @@ export default class goodest_centers extends React.Component {
                       <Text note numberOfLines = {2} style = {centersStyles.centerNmae}>{item.name}</Text>
                       <Text note numberOfLines = {2} style = {centersStyles.ordinaryText}>نوع مرکز:پلاتو</Text>
                       <Text note  style = {centersStyles.ordinaryText}> تعداد اتاق:{item.rooms.length}</Text>
-                      <ScrollView style = {centersStyles.propertiesView}>
+                      <ScrollView style = {centersStyles.CentersPropsView}>
                         <Text style = {[centersStyles.ordinaryText,{color:'white'}]}>ویژگی ها</Text>
-                        {this.showCentersProperties(item.center_attribute)}
+                        {this.showCentersProps(item.center_attribute)}
                     </ScrollView>
                     <Text note style = {centersStyles.ordinaryText}>{item.address}</Text>
                       <TouchableOpacity onPress = {()=>Actions.date({id:item.id,description:item.description})} 
@@ -98,8 +98,9 @@ export default class goodest_centers extends React.Component {
     }
     showImageSlider(images) {
       array_images = [];
+      let defaultImage = 'http://learnenglishteens.britishcouncil.org/sites/teens/files/rs6095_thinkstockphotos-119692035_1-low.jpg';
       if(images.length == 0){
-        array_images.push('http://learnenglishteens.britishcouncil.org/sites/teens/files/rs6095_thinkstockphotos-119692035_1-low.jpg');
+        array_images.push(defaultImage);
       }
       for(let lopCounter = 0; lopCounter < images.length; lopCounter++)
       {
@@ -111,21 +112,20 @@ export default class goodest_centers extends React.Component {
          images = {array_images}autoPlayWithInterval={2000}/> 
       )
     }
-    showCentersProperties(properties) {
+    showCentersProps(CentersProps) {
         return (
           <FlatList 
             style = {{flexDirection:'row'}}
-            data = {properties}
+            data = {CentersProps}
             keyExtractor = {(item) => item.name.toString()}
             renderItem = {({item}) =>
-            <Text style = {centersStyles.properties}>
+            <Text style = {centersStyles.CentersProps}>
               {item.name}
-            </Text> }
-          />
+            </Text>} />
         )
       }
     handleRefresh() {
-        this.setState({ page : 1 , refreshing : true } , () => {
+        this.setState({page : 1 , refreshing : true } , () => {
             this.getCentersRequest();
         })
     }

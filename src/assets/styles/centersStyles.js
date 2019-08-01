@@ -46,7 +46,7 @@ ordinaryText : {
     marginLeft : 5,
     marginTop : 5,
 },
-properties : {
+CentersProps : {
     backgroundColor : 'blue',
     color : 'white',
     marginLeft : 5,
@@ -57,7 +57,7 @@ properties : {
     borderWidth : 1,
     padding : 5
 },
-propertiesView : {
+CentersPropsView : {
     width : '100%',
     height : 100,
     backgroundColor : '#34495e',
