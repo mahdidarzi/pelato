@@ -92,7 +92,7 @@ export default class wallet extends React.Component {
         try {
             let { apiToken,an } = this.state;
 
-        var response = await fetch('http://192.168.88.2:8000/api/v1/wallet_amount', {
+        var response = await fetch('http://192.168.157.2:8000/api/v1/wallet_amount', {
             method : 'POST',
             headers : {
                 'Accept' : 'application/json',
@@ -135,7 +135,7 @@ export default class wallet extends React.Component {
 
         let { apiToken,price } = this.state;
         console.log(apiToken);
-        let response = await fetch('http://192.168.88.2:8000/api/v1/createwallet', {
+        let response = await fetch('http://192.168.157.2:8000/api/v1/createwallet', {
             method : 'POST',
             headers : {
                 'Accept' : 'application/json',
@@ -152,7 +152,7 @@ export default class wallet extends React.Component {
             if(json.code==200)
             {
                 return <WebView
-                source={{uri: 'http://192.168.88.2:8000/api/v1/chargewallet' , method : 'POST' , body : `api_token=${this.state.apiToken}&price=${price}` }}
+                source={{uri: 'http://192.168.157.2:8000/api/v1/chargewallet' , method : 'POST' , body : `api_token=${this.state.apiToken}&price=${price}` }}
                 startInLoadingState={true}
                 renderLoading={this.renderLoading}
             />
@@ -185,7 +185,7 @@ async create_wallet() {
     try {
         let apiToken = await AsyncStorage.getItem('apiToken');
   
-        let response = await fetch('http://192.168.88.2:8000/api/v1/createwallet', {
+        let response = await fetch('http://192.168.157.2:8000/api/v1/createwallet', {
             method : 'POST',
             headers : {
                 'Accept' : 'application/json',

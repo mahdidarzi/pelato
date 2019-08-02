@@ -210,7 +210,7 @@ borderRadius:8
         try {
             const { page } = this.state;
             var urls=[
-                `http://192.168.88.2:8000/api/v1/pelato/${this.props.id}?page=${page}`,
+                `http://192.168.157.2:8000/api/v1/pelato/${this.props.id}?page=${page}`,
                 // ` http://192.168.193.2:8000/api/v1/images/2`
             ]
             await this.setState({ loading : true});
@@ -255,7 +255,7 @@ borderRadius:8
         try {
             const { page } = this.state;
             var urls=[
-                `http://192.168.88.2:8000/api/v1/simplecenter/${this.props.id}?page=${page}`,
+                `http://192.168.157.2:8000/api/v1/simplecenter/${this.props.id}?page=${page}`,
             ]
           
             let response = await fetch(urls);

@@ -56,7 +56,7 @@ export default class splash extends React.Component {
 
     async CheckUserLoginFromApi(apiToken) {
         try {
-            let response = await fetch(`http://192.168.88.2:8000/api/v1/user?api_token=${apiToken}`);
+            let response = await fetch(`http://192.168.157.2:8000/api/v1/user?api_token=${apiToken}`);
             return response.status === 200;
         } catch(error) {
             console.log(error);

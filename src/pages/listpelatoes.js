@@ -84,7 +84,7 @@ export default class Home extends React.Component {
     }
 
     getProductRequest() {
-        fetch(`http://192.168.88.2:8000/api/v1/centertype/2`)
+        fetch(`http://192.168.157.2:8000/api/v1/centertype/2`)
             .then(response => response.json())
             .then(json => {
                 this.setState({

@@ -89,7 +89,7 @@ export default class goodest_centers extends React.Component {
                       <Text style = {{fontSize:16}}>مراکز</Text>
                     </Button>
                     <Button>
-                      <Text onPress = {()=>Actions.wallet()} style={{fontSize:16}}>کیف پول</Text>
+                      <Text onPress = {()=>Actions.wallet()} style = {{fontSize:16}}>کیف پول</Text>
                     </Button>
                   </FooterTab>
         </Footer>
@@ -127,7 +127,7 @@ export default class goodest_centers extends React.Component {
     handleRefresh() {
         this.setState({page : 1 , refreshing : true } , () => {
             this.getCentersRequest();
-        })
+        } )
     }
     renderFooter() {
         if(this.state.loading) return null
@@ -137,13 +137,13 @@ export default class goodest_centers extends React.Component {
         if(this.state.goodestCenters.length > 0) {
             this.setState({page : this.state.page + 1 , loading : true}, () => {
                 this.getCentersRequest()
-            })
+            } )
         }
     }
     async getCentersRequest() { //q:async and await
         try {
             const { page } = this.state;
-            var urls = `http://192.168.88.2:8000/api/v1/goodest_centers?page=${page}`;
+            var urls = `http://192.168.157.2:8000/api/v1/goodest_centers?page=${page}`;
             await this.setState({ loading : true});
             let response = await fetch(urls);
             let json = await response.json();

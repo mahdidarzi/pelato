@@ -47,7 +47,7 @@ export default class login extends Component {
       
         if(  phonenumber.valueOf()!==''&& username.valueOf()!=='')  {
 
-          let  response= fetch('http://192.168.88.2:8000/api/v1/register',{
+          let  response= fetch('http://192.168.157.2:8000/api/v1/register',{
 
                 method: 'POST',
                 headers: {
@@ -86,7 +86,7 @@ async registertest() {
     try {
         let { phonenumber , username,off } = this.state;
 
-        var response = await fetch('http://192.168.88.2:8000/api/v1/register', {
+        var response = await fetch('http://192.168.157.2:8000/api/v1/register', {
             method : 'POST',
             headers : {
                 'Accept' : 'application/json',

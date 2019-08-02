@@ -147,7 +147,7 @@ _show_date2(){
         try {
             let apiToken = await AsyncStorage.getItem('apiToken');
       console.log(apiToken);
-            let response = await fetch('http://192.168.88.2:8000/api/v1/log_out', {
+            let response = await fetch('http://192.168.157.2:8000/api/v1/log_out', {
                 method : 'POST',
                 headers : {
                     'Accept' : 'application/json',

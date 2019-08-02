@@ -1045,7 +1045,7 @@ export default class rooms extends React.Component {
       console.log(r+'sssss')
     }
   
-    // let response =  fetch(`http://192.168.88.2:8000/api/v1/pelato/${this.props.id}?page=${page}`);
+    // let response =  fetch(`http://192.168.157.2:8000/api/v1/pelato/${this.props.id}?page=${page}`);
     handleRefresh() {
         this.setState({ page : 1 , refreshing : true } , () => {
             this.getProductRequest();
@@ -1072,8 +1072,8 @@ export default class rooms extends React.Component {
         try {
             const { page } = this.state;
             var urls=[
-                // `http://192.168.88.2:8000/api/v1/weeks_full/1/2019-02-08`,
-                `http://192.168.88.2:8000/api/v1/weeks/${this.props.id}/${this.props.datem}/?page=${page}`
+                // `http://192.168.157.2:8000/api/v1/weeks_full/1/2019-02-08`,
+                `http://192.168.157.2:8000/api/v1/weeks/${this.props.id}/${this.props.datem}/?page=${page}`
             ]
           
             let response = await fetch(urls);
@@ -1093,9 +1093,9 @@ export default class rooms extends React.Component {
         try {
             const { page } = this.state;
             await this.setState({ loading : true});
-            // let response = await fetch(`http://192.168.88.2:8000/api/v1/weeks/${this.props.id}/${this.props.datem}/?page=${page}`);
-            let response = await fetch(`http://192.168.88.2:8000/api/v1/weeks/${this.props.id}/${this.props.datem}/?page=${page}`);
-            // http://192.168.88.2:8000/api/v1/weeks/1/2019-04-01?page=1
+            // let response = await fetch(`http://192.168.157.2:8000/api/v1/weeks/${this.props.id}/${this.props.datem}/?page=${page}`);
+            let response = await fetch(`http://192.168.157.2:8000/api/v1/weeks/${this.props.id}/${this.props.datem}/?page=${page}`);
+            // http://192.168.157.2:8000/api/v1/weeks/1/2019-04-01?page=1
 
             console.log(response.status)
             if(response.status==500){

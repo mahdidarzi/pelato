@@ -56,7 +56,7 @@ export default class vebview extends React.Component {
         var a='4_pelato_5579';
         
         return <WebView
-            source={{uri: 'http://192.168.88.2:8000/api/v1/buy' , method : 'POST' , body : `api_token=${this.state.apiToken}&romtiming_id=${room_id}` }}
+            source={{uri: 'http://192.168.157.2:8000/api/v1/buy' , method : 'POST' , body : `api_token=${this.state.apiToken}&romtiming_id=${room_id}` }}
             startInLoadingState={true}
             renderLoading={this.renderLoading}
         />
@@ -65,7 +65,7 @@ export default class vebview extends React.Component {
         var a='4_pelato_5579';
         
         return <WebView
-        source={{uri: 'http://192.168.88.2:8000/api/v1/chargewallet' , method : 'POST' , body : `api_token=${this.props.apiToken}&price=${this.props.price}` }}
+        source={{uri: 'http://192.168.157.2:8000/api/v1/chargewallet' , method : 'POST' , body : `api_token=${this.props.apiToken}&price=${this.props.price}` }}
         startInLoadingState={true}
         renderLoading={this.renderLoading}
     />
