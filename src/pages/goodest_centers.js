@@ -16,10 +16,11 @@ export default class goodest_centers extends React.Component {
             loading : false,
             refreshing : false,
             showSpiner : 0,
+            t:0
         }
     }
      componentDidMount() {
-        this.getCentersRequest();
+        this.getCentersRequest((goodestCenters) => {console.log(['getCentersRequest:done',goodestCenters]) });
       }
       componentWillUpdate() {
         BackHandler.addEventListener('hardwareBackPress', this.onHandleBackButton);
@@ -44,37 +45,13 @@ export default class goodest_centers extends React.Component {
                 <FlatList
                    data = {this.state.goodestCenters}
                    ListEmptyComponent ={ () =>this.state.showSpiner == 0 ?<Spinner/>  : null}
-                  //  ListFooterComponent = {this.state.loading?null:< Spinner />}
-                   ListFooterComponent = {this.renderFooter.bind(this)}
+                   ListFooterComponent = {this.state.loading?null:< Spinner />}
                    refreshing = {this.state.refreshing}
                    onRefresh = {this.handleRefresh.bind(this)}
                    onEndReached = {this.handleLoadMore.bind(this)}
-                   onEndReachedThreshold = {0.7}
+                   onEndReachedThreshold = {0.3}
                    keyExtractor = {(item) => item.id.toString()}
-                   renderItem = {({item})=>
-                    <View key = {item.id} style={centersStyles.centerContainer}>
-                      <View style = {centersStyles.goodestCenterBox}>
-                        <Text style = {centersStyles.goodestCenterBoxsText}>برترین مراکز</Text>
-                    </View>
-                    <View style = {centersStyles.imageView}>   
-                      {this.showImgSlider( item.images )}                  
-                    </View>
-                    <View key = {item.id} style = {{ padding : 10 , }}>                      
-                      <Text note numberOfLines = {2} style = {centersStyles.centerNmae}>{item.name}</Text>
-                      <Text note numberOfLines = {2} style = {centersStyles.ordinaryText}>نوع مرکز:پلاتو</Text>
-                      <Text note  style = {centersStyles.ordinaryText}> تعداد اتاق:{item.rooms.length}</Text>
-                      <ScrollView style = {centersStyles.CentersPropsView}>
-                        <Text style = {[centersStyles.ordinaryText,{color:'white'}]}>ویژگی ها</Text>
-                        {this.showCentersProps(item.center_attribute)}
-                    </ScrollView>
-                    <Text note style = {centersStyles.ordinaryText}>{item.address}</Text>
-                      <TouchableOpacity onPress = {()=>Actions.date({id:item.id,description:item.description})} 
-                      style = {centersStyles.btnreserve}>
-                        <Text style = {centersStyles.reserveText}>مشاهده و رزرو مرکز</Text>
-                    </TouchableOpacity>
-                    </View>      
-                  </View>
-                }
+                   renderItem={this.flatRenItem}
                 />
                  <Footer >
                   <FooterTab style = {{ backgroundColor : '#34495e'}}>
@@ -95,6 +72,32 @@ export default class goodest_centers extends React.Component {
         </Footer>
             </Container>
         )
+    }
+    flatRenItem = ({item}) => {
+      return(
+        <View style={centersStyles.centerContainer}>
+      <View style = {centersStyles.goodestCenterBox}>
+        <Text style = {centersStyles.goodestCenterBoxsText}>برترین مراکز</Text>
+    </View>
+    <View style = {centersStyles.imageView}>   
+      {this.showImgSlider( item.images )}                  
+    </View>
+    <View  style = {{ padding : 10 , }}>                      
+      <Text note numberOfLines = {2} style = {centersStyles.centerNmae}>{item.id}</Text>
+      <Text note numberOfLines = {2} style = {centersStyles.ordinaryText}>نوع مرکز:پلاتو</Text>
+      <Text note  style = {centersStyles.ordinaryText}> تعداد اتاق:{item.rooms.length}</Text>
+      <ScrollView style = {centersStyles.CentersPropsView}>
+        <Text style = {[centersStyles.ordinaryText,{color:'white'}]}>ویژگی ها</Text>
+        {this.showCentersProps(item.center_attribute)}
+    </ScrollView>
+    <Text note style = {centersStyles.ordinaryText}>{item.address}</Text>
+      <TouchableOpacity onPress = {()=>Actions.date({id:item.id,description:item.description})} 
+      style = {centersStyles.btnreserve}>
+        <Text style = {centersStyles.reserveText}>مشاهده و رزرو مرکز</Text>
+    </TouchableOpacity>
+    </View>      
+  </View>
+      )
     }
     showImgSlider(images) {
       arrImgs = [];
@@ -117,7 +120,7 @@ export default class goodest_centers extends React.Component {
           <FlatList 
             style = {{flexDirection:'row'}}
             data = {CentersProps}
-            keyExtractor = {(item) => item.name.toString()}
+            keyExtractor = {(item) => item.id.toString()}
             renderItem = {({item}) =>
             <Text style = {centersStyles.CentersProps}>
               {item.name}
@@ -125,26 +128,24 @@ export default class goodest_centers extends React.Component {
         )
       }
     handleRefresh() {
-        this.setState({page : 1 , refreshing : true } , () => {
-            this.getCentersRequest();
-        } )
-    }
-    renderFooter() {
-        if(this.state.loading) return null
-         return <Spinner/>
+        this.setState({page : 1 , refreshing : true},
+        () => this.getCentersRequest(
+        () => console.log('handleRefresh:done'))
+      );   
     }
     handleLoadMore() {
-        if(this.state.goodestCenters.length > 0) {
-            this.setState({page : this.state.page + 1 , loading : true}, () => {
-                this.getCentersRequest()
-            } )
-        }
+      let { page ,loading} = this.state;
+      if (loading===false){ 
+      this.setState({page : page + 1 ,loading:true}, 
+      () => this.getCentersRequest(
+      ()=> console.log(`handleLoadMore:done currentpage:${page}`)))
+      }
     }
-    async getCentersRequest() { //q:async and await
+    async getCentersRequest(callback) { //q:async and await
         try {
             const { page } = this.state;
             var urls = `http://192.168.157.2:8000/api/v1/goodest_centers?page=${page}`;
-            await this.setState({ loading : true});
+            await this.setState({loading : true});
             let response = await fetch(urls);
             let json = await response.json();
             var goodestCenters = json.data.data;
@@ -156,11 +157,14 @@ export default class goodest_centers extends React.Component {
                         refreshing : false,
                         loading:false,   
                     }
+                  
                 })
                 //i had a warninig for below command
                 //hint: carefuly read warning
                 // this.setState({ loading : false})
             }   
+            if (typeof callback =='function')
+            callback(goodestCenters);
         } catch(error) {
             console.log(error)
         }
