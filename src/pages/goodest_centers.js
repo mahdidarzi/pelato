@@ -20,9 +20,8 @@ export default class goodest_centers extends React.Component {
         }
     }
      componentDidMount() {
+      this.Testfunc();
         this.getCentersRequest((goodestCenters) => {console.log(['getCentersRequest:done',goodestCenters]) });
-      }
-      componentWillUpdate() {
         BackHandler.addEventListener('hardwareBackPress', this.onHandleBackButton);
       }
     render() {
@@ -38,7 +37,7 @@ export default class goodest_centers extends React.Component {
                        <Body style = {headerStyles.body}><Text style = {headerStyles.bodyText}> پنل کاربری پلاتو</Text></Body>
                     <Left style = {headerStyles.headerLeftStyle3}>
                       <View  style = {headerStyles.personIconView}>
-                        <Icon  name = 'person'   style = {headerStyles.iconPerson}/>
+                        <Icon  name = 'person' style = {headerStyles.iconPerson}/>
                       </View>
                     </Left> 
                 </Header>
@@ -129,44 +128,37 @@ export default class goodest_centers extends React.Component {
       }
     handleRefresh() {
         this.setState({page : 1 , refreshing : true},
-        () => this.getCentersRequest(
-        () => console.log('handleRefresh:done'))
-      );   
+        () => this.getCentersRequest().then(console.log('handleRefresh:done')));  
     }
     handleLoadMore() {
       let { page ,loading} = this.state;
       if (loading===false){ 
       this.setState({page : page + 1 ,loading:true}, 
-      () => this.getCentersRequest(
-      ()=> console.log(`handleLoadMore:done currentpage:${page}`)))
+      () => this.getCentersRequest().then(console.log(`handleLoadMore:done currentpage:${page}`)))
       }
     }
-    async getCentersRequest(callback) { //q:async and await
+    async getCentersRequest(callback) {
         try {
             const { page } = this.state;
             var urls = `http://192.168.157.2:8000/api/v1/goodest_centers?page=${page}`;
-            await this.setState({loading : true});
+            this.setState({loading : true});
             let response = await fetch(urls);
             let json = await response.json();
             var goodestCenters = json.data.data;
-            if(goodestCenters.length > 0) {
+              if(goodestCenters.length > 0) {
                 this.setState(prevState => {
                   return {
                         goodestCenters : page === 1 ? goodestCenters : [...prevState.goodestCenters , ...goodestCenters],
                         page : json.data.current_page,
                         refreshing : false,
                         loading:false,   
-                    }
-                  
+                    }  
                 })
-                //i had a warninig for below command
-                //hint: carefuly read warning
-                // this.setState({ loading : false})
             }   
             if (typeof callback =='function')
             callback(goodestCenters);
-        } catch(error) {
-            console.log(error)
+        } catch(err) {
+            console.log(err)
         }
     }
     handleBackButton() {
