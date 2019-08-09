@@ -1,6 +1,6 @@
 import React from 'react';
 import {FlatList, Image, TouchableOpacity, BackHandler, ToastAndroid, ScrollView} from 'react-native';
-import {Container, Header, Button, Text, Left, Icon , View , Spinner, FooterTab, Footer, Body} from 'native-base';
+import {Container, Header, Button, Text, Left, Icon , View , Spinner, FooterTab, Footer, Body, Content} from 'native-base';
 import {Actions} from 'react-native-router-flux';
 import ImageSlider from 'react-native-image-slider';
 import headerStyles from './../assets/styles/header';
@@ -20,8 +20,7 @@ export default class goodest_centers extends React.Component {
         }
     }
      componentDidMount() {
-      this.Testfunc();
-        this.getCentersRequest((goodestCenters) => {console.log(['getCentersRequest:done',goodestCenters]) });
+        this.getCentersRequest((goodestCenters) => {console.log(['getCentersRequest:done',goodestCenters])});
         BackHandler.addEventListener('hardwareBackPress', this.onHandleBackButton);
       }
     render() {
@@ -32,7 +31,7 @@ export default class goodest_centers extends React.Component {
                         <Icon  name = "md-menu" onPress={() => Actions.drawerOpen()} style = {headerStyles.drawerStlye}/>
                     </Left> 
                     <Left style = {headerStyles.headerLeftStyle2}>
-                      <Image source = {require('./../assets/image/pelatos.png')}  />
+                      <Image source = {require('./../assets/image/pelatos.png')}/>
                     </Left> 
                        <Body style = {headerStyles.body}><Text style = {headerStyles.bodyText}> پنل کاربری پلاتو</Text></Body>
                     <Left style = {headerStyles.headerLeftStyle3}>
@@ -41,17 +40,22 @@ export default class goodest_centers extends React.Component {
                       </View>
                     </Left> 
                 </Header>
-                <FlatList
-                   data = {this.state.goodestCenters}
-                   ListEmptyComponent ={ () =>this.state.showSpiner == 0 ?<Spinner/>  : null}
-                   ListFooterComponent = {this.state.loading?null:< Spinner />}
-                   refreshing = {this.state.refreshing}
-                   onRefresh = {this.handleRefresh.bind(this)}
-                   onEndReached = {this.handleLoadMore.bind(this)}
-                   onEndReachedThreshold = {0.3}
-                   keyExtractor = {(item) => item.id.toString()}
-                   renderItem={this.flatRenItem}
-                />
+                <Content>
+                    <View style = {centersStyles.goodestCenterBox}>
+                      <Text style = {centersStyles.goodestCenterBoxsText}>برترین مراکز</Text>
+                    </View>
+                    <FlatList
+                    data = {this.state.goodestCenters}
+                    ListEmptyComponent ={ () =>this.state.showSpiner == 0 ?<Spinner/>  : null}
+                    ListFooterComponent = {this.state.loading?null:< Spinner />}
+                    refreshing = {this.state.refreshing}
+                    onRefresh = {this.handleRefresh.bind(this)}
+                    onEndReached = {this.handleLoadMore.bind(this)}
+                    onEndReachedThreshold = {0.3}
+                    keyExtractor = {(item) => item.id.toString()}
+                    renderItem={this.flatRenItem}
+                  />
+                </Content>
                  <Footer >
                   <FooterTab style = {{ backgroundColor : '#34495e'}}>
                     <Button style = {{ backgroundColor : 'cyan'}} >
@@ -75,14 +79,11 @@ export default class goodest_centers extends React.Component {
     flatRenItem = ({item}) => {
       return(
         <View style={centersStyles.centerContainer}>
-      <View style = {centersStyles.goodestCenterBox}>
-        <Text style = {centersStyles.goodestCenterBoxsText}>برترین مراکز</Text>
-    </View>
     <View style = {centersStyles.imageView}>   
       {this.showImgSlider( item.images )}                  
     </View>
-    <View  style = {{ padding : 10 , }}>                      
-      <Text note numberOfLines = {2} style = {centersStyles.centerNmae}>{item.id}</Text>
+    <View  style = {{ padding : 10}}>                      
+      <Text note numberOfLines = {2} style = {centersStyles.centerNmae}>{item.name}</Text>
       <Text note numberOfLines = {2} style = {centersStyles.ordinaryText}>نوع مرکز:پلاتو</Text>
       <Text note  style = {centersStyles.ordinaryText}> تعداد اتاق:{item.rooms.length}</Text>
       <ScrollView style = {centersStyles.CentersPropsView}>
