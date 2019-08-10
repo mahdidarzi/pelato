@@ -28,15 +28,13 @@ imageView : {
     borderColor : 'white',
     borderRadius : 8,
 },
-centerNmae : {
+centerName : {
     marginLeft : 120,
     marginRight : 120,
-    color : '#00cec9',
     fontSize : 16,
-    color : 'white',
+    color : 'cyan',
     marginBottom : 8,
     fontSize : 16,
-    marginLeft : 5,
     marginTop : 5,
 },
 ordinaryText : {

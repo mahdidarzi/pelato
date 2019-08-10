@@ -201,7 +201,7 @@ async componentWillMount() {
                   
                   <Card>
                     <LinearGradient   colors={['#1e3799','#dff9fb']} style={styles.gradiant}>
-                  <TouchableOpacity onPress={()=>Actions.part1({id:item.id})}>
+                  <TouchableOpacity onPress={()=>Actions.showCenter({id:item.id, simpOrGodCenter : 'simpleCenter'})}>
 
                   <CardItem style={{marginLeft:60,marginRight:100,width:200,height:50,borderColor:'#0c2461',borderWidth:1}}>
 

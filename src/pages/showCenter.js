@@ -3,9 +3,9 @@ import {FlatList, Image, TouchableOpacity, BackHandler, ToastAndroid, ScrollView
 import {Container, Header, Button, Text, Left, Icon , View , Spinner, FooterTab, Footer, Body, Content} from 'native-base';
 import {Actions} from 'react-native-router-flux';
 import ImageSlider from 'react-native-image-slider';
-import headerStyles from './../assets/styles/header';
+import headerStyles from '../assets/styles/header';
 import centersStyles from '../assets/styles/centersStyles';
-export default class goodest_centers extends React.Component {
+export default class showCenter extends React.Component {
     constructor(props) {
         super(props);
         this.backBtnCount = 0;//q
@@ -20,7 +20,7 @@ export default class goodest_centers extends React.Component {
         }
     }
      componentDidMount() {
-        this.getCentersRequest((goodestCenters) =>  {this.state.refreshing == 'false' ?console.log('false') :console.log('true')});
+        this.getCentersRequest((goodestCenters) => {console.log(['getCentersRequest:done',goodestCenters]) });
         BackHandler.addEventListener('hardwareBackPress', this.onHandleBackButton);
       }
     render() {
@@ -31,7 +31,7 @@ export default class goodest_centers extends React.Component {
                         <Icon  name = "md-menu" onPress={() => Actions.drawerOpen()} style = {headerStyles.drawerStlye}/>
                     </Left> 
                     <Left style = {headerStyles.headerLeftStyle2}>
-                      <Image source = {require('./../assets/image/pelatos.png')}/>
+                      <Image source = {require('./../assets/image/pelatos.png')}  />
                     </Left> 
                        <Body style = {headerStyles.body}><Text style = {headerStyles.bodyText}> پنل کاربری پلاتو</Text></Body>
                     <Left style = {headerStyles.headerLeftStyle3}>
@@ -40,9 +40,11 @@ export default class goodest_centers extends React.Component {
                       </View>
                     </Left> 
                 </Header>
-                <Content>
-                {this.state.loading == 'false' ? <Text>false</Text> :<Text>true</Text>}
-                    <FlatList
+                {this.props.simpOrGodCenter != 'simpleCenter' ? 
+                <View style = {centersStyles.goodestCenterBox}>
+                <Text style = {centersStyles.goodestCenterBoxsText}>برترین مراکز</Text>
+              </View>:null}
+                  <FlatList
                     data = {this.state.goodestCenters}
                     ListEmptyComponent ={ () =>this.state.showSpiner == 0 ?<Spinner/>  : null}
                     ListFooterComponent = {this.state.loading?null:< Spinner />}
@@ -53,7 +55,6 @@ export default class goodest_centers extends React.Component {
                     keyExtractor = {(item) => item.id.toString()}
                     renderItem={this.flatRenItem}
                   />
-                </Content>
                  <Footer >
                   <FooterTab style = {{ backgroundColor : '#34495e'}}>
                     <Button style = {{ backgroundColor : 'cyan'}} >
@@ -77,27 +78,26 @@ export default class goodest_centers extends React.Component {
     flatRenItem = ({item}) => {
       return(
         <View style={centersStyles.centerContainer}>
-           <View style = {centersStyles.goodestCenterBox}>
-                      <Text style = {centersStyles.goodestCenterBoxsText}>برترین مراکز</Text>
-                    </View>
-    <View style = {centersStyles.imageView}>   
-      {this.showImgSlider( item.images )}                  
-    </View>
-    <View  style = {{ padding : 10}}>                      
-      <Text note numberOfLines = {2} style = {centersStyles.centerNmae}>{item.id}</Text>
-      <Text note numberOfLines = {2} style = {centersStyles.ordinaryText}>نوع مرکز:پلاتو</Text>
-      <Text note  style = {centersStyles.ordinaryText}> تعداد اتاق:{item.rooms.length}</Text>
-      <ScrollView style = {centersStyles.CentersPropsView}>
-        <Text style = {[centersStyles.ordinaryText,{color:'white'}]}>ویژگی ها</Text>
-        {this.showCentersProps(item.center_attribute)}
-    </ScrollView>
-    <Text note style = {centersStyles.ordinaryText}>{item.address}</Text>
-      <TouchableOpacity onPress = {()=>Actions.date({id:item.id,description:item.description})} 
-      style = {centersStyles.btnreserve}>
-        <Text style = {centersStyles.reserveText}>مشاهده و رزرو مرکز</Text>
-    </TouchableOpacity>
-    </View>      
-  </View>
+          <View style = {centersStyles.imageView}>   
+            {this.showImgSlider( item.images )}                  
+          </View>
+          <View  style = {{ padding : 10 , }}>                      
+            <View style = {{justifyContent : 'center', alignItems : 'center'}}>
+              <Text note numberOfLines = {2} style = {centersStyles.centerName}>{item.name}</Text>
+            </View>
+            <Text note numberOfLines = {2} style = {centersStyles.ordinaryText}>نوع مرکز:پلاتو</Text>
+            <Text note  style = {centersStyles.ordinaryText}> تعداد اتاق:{item.rooms.length}</Text>
+            <ScrollView style = {centersStyles.CentersPropsView}>
+              <Text style = {[centersStyles.ordinaryText,{color:'white'}]}>ویژگی ها</Text>
+              {this.showCentersProps(item.center_attribute)}
+          </ScrollView>
+          <Text note style = {centersStyles.ordinaryText}>{item.address}</Text>
+            <TouchableOpacity onPress = {()=>Actions.date({id:item.id,description:item.description})} 
+            style = {centersStyles.btnreserve}>
+              <Text style = {centersStyles.reserveText}>مشاهده و رزرو مرکز</Text>
+          </TouchableOpacity>
+          </View>      
+        </View>
       )
     }
     showImgSlider(images) {
@@ -133,30 +133,35 @@ export default class goodest_centers extends React.Component {
         () => this.getCentersRequest().then(console.log('handleRefresh:done')));  
     }
     handleLoadMore() {
-      alert('d');
-      let { page ,loading} = this.state;
+      let {page, loading} = this.state;
+      if (loading == false){ 
       this.setState({page : page + 1 ,loading:true}, 
-      () => this.getCentersRequest(() => console.log(`handleLoadMore:done currentpage:${page}`)))
+      () => this.getCentersRequest().then(console.log(`handleLoadMore:done currentpage:${page}`)))
       }
+    }
     async getCentersRequest(callback) {
         try {
-            const { page } = this.state;
-            var urls =  `http://192.168.157.2:8000/api/v1/goodest_centers?page=${page}`;
-             this.setState({loading : true});
-            let response = await fetch(urls);
-            let json = await response.json();
-            var goodestCenters =  json.data.data;
-              if(goodestCenters.length > 0) {
-                await this.setState(prevState => {
+            const {page} = this.state;
+            const {simpOrGodCenter, id} = this.props;
+            let url, json, response, goodestCenters;
+            url = `http://192.168.157.2:8000/api/v1/goodest_centers?page=${page}`
+            if(simpOrGodCenter =='simpleCenter')
+            url = `http://192.168.157.2:8000/api/v1/simplecenter/${id}?page=${page}`;
+            console.log(url)
+            this.setState({loading : true});
+            response = await fetch(url);
+            json = await response.json();
+           goodestCenters = json.data.data;
+          if(goodestCenters.length > 0) {
+                this.setState(prevState => {
                   return {
-                        goodestCenters : page === 1 ? goodestCenters : [...prevState.goodestCenters , ...goodestCenters],
+                        goodestCenters : page == 1 ? goodestCenters : [...prevState.goodestCenters , ...goodestCenters],
                         page : json.data.current_page,
                         refreshing : false,
                         loading:false,   
                     }  
                 })
-            } 
-            this.state.loading == 'false' ?console.log('false') :console.log('true')  
+            }   
             if (typeof callback =='function')
             callback(goodestCenters);
         } catch(err) {

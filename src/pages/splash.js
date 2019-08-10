@@ -12,7 +12,7 @@ export default class splash extends React.Component {
 
         this.CheckUserLogin().then(status => {
             if(status) {
-                Actions.jump('goodest_centers');
+                Actions.jump('showCenter');
             } else {
                 // Actions.reset('register');
                 Actions.replace('login2');

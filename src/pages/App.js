@@ -7,13 +7,12 @@ import  login  from "../pages/login";
 import  login2  from "../pages/login2";
 import  home  from "../pages/home";
 import splash from "../pages/splash";
-import part1 from "../pages/part1";
 import rooms from "./rooms";
 import date from "./date";
 import factor from "../pages/factor";
 import wv from "../pages/wv"; 
 
-import goodest_centers from "../pages/goodest_centers"; 
+import showCenter from "../pages/showCenter"; 
 import wallet from "../pages/wallet"; 
 import DrawerLayout from "../pages/DrawerLayout"; 
 import unique_code from "../pages/unique_code"; 
@@ -38,39 +37,6 @@ export default class App extends Component {
     return (
     
      <Router >
-              
-              {/* <Drawer
-        // hideNavBar='true
-//every thing use in a special place dont pass of everything with simple sight
-      key="drawer"
-      contentComponent={DrawerLayout}
-      drawerPosition="right"
-  >        
-          
-       <Scene key='root' hideNavBar>
-       <Scene key='goodest_centers' component={goodest_centers}/>
-       <Scene key='register' component={register}/>
-       <Scene key='login' component={login}  />
-       <Scene key='login2' component={login2}  />
-       <Scene key='home' component={home}  />
-       <Scene key='part1' component={part1}  />
-       <Scene key='rooms' component={rooms}  />
-       <Scene key='date' component={date}  />
-       <Scene key='factor' component={factor}  />
-       <Scene key='splash' component={splash}initial  />
-       <Scene key='wv' component={wv}  /> 
-       <Scene key='vebview' component={vebview}  />
-       <Scene key='wallet' component={wallet}  /> 
-       <Scene key='unique_code' component={unique_code}/>  
-       <Scene key='subscribe' component={subscribe}/> 
-       <Scene key='as' component={as} /> 
-         </Scene>
-         <Lightbox>  
-         <Scene key='lightbox' component={lightbox} /> 
-         
-         </Lightbox>
-         </Drawer>
-          */}
              <Drawer
       contentComponent={DrawerLayout}
       drawerPosition="right"
@@ -83,8 +49,6 @@ export default class App extends Component {
     <Scene key='register' component={register} />
     <Scene key='login' component={login}  />
     <Scene key='home' component={home}  />
-   
-       <Scene key='part1' component={part1}  />
        <Scene key='rooms' component={rooms}  />
        <Scene key='date' component={date}  />
        <Scene key='factor' component={factor}  />
@@ -92,7 +56,7 @@ export default class App extends Component {
        <Scene key='unique_code' component={unique_code}/>  
        <Scene key='subscribe' component={subscribe} /> 
        <Scene key='as' component={as} /> 
-       <Scene key='goodest_centers' component={goodest_centers}/>
+       <Scene key='showCenter' component={showCenter}/>
        <Scene key='wv' component={wv}  /> 
        <Scene key='professionnal_Search' component={professionnal_Search}  /> 
     </Scene>
