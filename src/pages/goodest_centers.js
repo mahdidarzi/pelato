@@ -20,7 +20,7 @@ export default class goodest_centers extends React.Component {
         }
     }
      componentDidMount() {
-        this.getCentersRequest((goodestCenters) => {console.log(['getCentersRequest:done',goodestCenters])});
+        this.getCentersRequest((goodestCenters) =>  {this.state.refreshing == 'false' ?console.log('false') :console.log('true')});
         BackHandler.addEventListener('hardwareBackPress', this.onHandleBackButton);
       }
     render() {
@@ -41,7 +41,9 @@ export default class goodest_centers extends React.Component {
                     </Left> 
                 </Header>
                 <Content>
+                {this.state.loading == 'false' ? <Text>false</Text> :<Text>true</Text>}
                     <View style = {centersStyles.goodestCenterBox}>
+                    
                       <Text style = {centersStyles.goodestCenterBoxsText}>برترین مراکز</Text>
                     </View>
                     <FlatList
@@ -83,7 +85,7 @@ export default class goodest_centers extends React.Component {
       {this.showImgSlider( item.images )}                  
     </View>
     <View  style = {{ padding : 10}}>                      
-      <Text note numberOfLines = {2} style = {centersStyles.centerNmae}>{item.name}</Text>
+      <Text note numberOfLines = {2} style = {centersStyles.centerNmae}>{item.id}</Text>
       <Text note numberOfLines = {2} style = {centersStyles.ordinaryText}>نوع مرکز:پلاتو</Text>
       <Text note  style = {centersStyles.ordinaryText}> تعداد اتاق:{item.rooms.length}</Text>
       <ScrollView style = {centersStyles.CentersPropsView}>
@@ -132,22 +134,22 @@ export default class goodest_centers extends React.Component {
         () => this.getCentersRequest().then(console.log('handleRefresh:done')));  
     }
     handleLoadMore() {
+      alert('d');
       let { page ,loading} = this.state;
-      if (loading===false){ 
       this.setState({page : page + 1 ,loading:true}, 
-      () => this.getCentersRequest().then(console.log(`handleLoadMore:done currentpage:${page}`)))
+      () => this.getCentersRequest(() => console.log(`handleLoadMore:done currentpage:${page}`)))
       }
-    }
     async getCentersRequest(callback) {
         try {
             const { page } = this.state;
-            var urls = `http://192.168.157.2:8000/api/v1/goodest_centers?page=${page}`;
-            this.setState({loading : true});
+            var urls =  `http://192.168.157.2:8000/api/v1/goodest_centers?page=${page}`;
+             this.setState({loading : true});
             let response = await fetch(urls);
             let json = await response.json();
-            var goodestCenters = json.data.data;
+            var goodestCenters =  json.data.data;
               if(goodestCenters.length > 0) {
-                this.setState(prevState => {
+                console.log('bi')
+                await this.setState(prevState => {
                   return {
                         goodestCenters : page === 1 ? goodestCenters : [...prevState.goodestCenters , ...goodestCenters],
                         page : json.data.current_page,
@@ -155,7 +157,8 @@ export default class goodest_centers extends React.Component {
                         loading:false,   
                     }  
                 })
-            }   
+            } 
+            this.state.loading == 'false' ?console.log('false') :console.log('true')  
             if (typeof callback =='function')
             callback(goodestCenters);
         } catch(err) {
