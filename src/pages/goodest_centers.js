@@ -42,10 +42,6 @@ export default class goodest_centers extends React.Component {
                 </Header>
                 <Content>
                 {this.state.loading == 'false' ? <Text>false</Text> :<Text>true</Text>}
-                    <View style = {centersStyles.goodestCenterBox}>
-                    
-                      <Text style = {centersStyles.goodestCenterBoxsText}>برترین مراکز</Text>
-                    </View>
                     <FlatList
                     data = {this.state.goodestCenters}
                     ListEmptyComponent ={ () =>this.state.showSpiner == 0 ?<Spinner/>  : null}
@@ -81,6 +77,9 @@ export default class goodest_centers extends React.Component {
     flatRenItem = ({item}) => {
       return(
         <View style={centersStyles.centerContainer}>
+           <View style = {centersStyles.goodestCenterBox}>
+                      <Text style = {centersStyles.goodestCenterBoxsText}>برترین مراکز</Text>
+                    </View>
     <View style = {centersStyles.imageView}>   
       {this.showImgSlider( item.images )}                  
     </View>
@@ -148,7 +147,6 @@ export default class goodest_centers extends React.Component {
             let json = await response.json();
             var goodestCenters =  json.data.data;
               if(goodestCenters.length > 0) {
-                console.log('bi')
                 await this.setState(prevState => {
                   return {
                         goodestCenters : page === 1 ? goodestCenters : [...prevState.goodestCenters , ...goodestCenters],
