@@ -9,40 +9,39 @@ export default class subscribe extends React.Component {
         this.state = {
             subscribe:[],
             apiToken:null,
-            // m:await AsyncStorage.getItem('apiToken'),
+            showSpiner : 0
         }
     }
-    componentWillMount() {
+    componentDidMount() {
           this.subscribe();
     }
     render() {
+        const {subscribe} = this.state;
         return (
-            
-            <Container style={{ backgroundColor : '#2d3436'}}>
-                <Header   style = {headerStyles.headersbackground} androidStatusBarColor="#2c3e50" iosBarStyle="light-content">
-                       <Left style={headerStyles.headerLeftStyle1}>
-                        <Icon  name="md-menu" onPress={() => Actions.drawerOpen() } style={headerStyles.drawerStlye}/>
+            <Container style = {{ backgroundColor : '#2d3436'}}>
+                <Header   style = {headerStyles.headersbackground} androidStatusBarColor = "#2c3e50" iosBarStyle = "light-content">
+                       <Left style = {headerStyles.headerLeftStyle1}>
+                        <Icon  name = "md-menu" onPress = {() => Actions.drawerOpen() } style = {headerStyles.drawerStlye}/>
                     </Left> 
-                    <Left style={headerStyles.headerLeftStyle2}>
-                    <Image  source={require('./../assets/image/pelatos.png')}/>
+                    <Left style = {headerStyles.headerLeftStyle2}>
+                    <Image  source = {require('./../assets/image/pelatos.png')}/>
                     </Left> 
-                       <Body style={headerStyles.body}><Text style={headerStyles.bodyText}> پنل کاربری پلاتو</Text></Body>
-                    <Left style={headerStyles.headerLeftStyle3}>
-                          <View  style={headerStyles.personIconView}>
-                   <Icon  name='person'   style={headerStyles.iconPerson}/>
+                       <Body style = {headerStyles.body}><Text style = {headerStyles.bodyText}> پنل کاربری پلاتو</Text></Body>
+                    <Left style = {headerStyles.headerLeftStyle3}>
+                          <View  style = {headerStyles.personIconView}>
+                   <Icon  name = 'person'   style = {headerStyles.iconPerson}/>
                        </View>
-                    </Left> 
-                      
+                    </Left>   
                 </Header>
                   <FlatList
-                    data={this.state.subscribe}
-                    keyExtractor={(item) => item.id.toString()}
-                  renderItem={({item})=> 
-                  
+                    ListEmptyComponent ={() => <Spinner/>}
+                    data = {subscribe}
+                    keyExtractor = {(item) => item.id.toString()}
+                  renderItem = {({item})=> 
                   <Card>
-                  <CardItem >
+                  <CardItem>
                   <Left>
-                  <Text>{item.username} </Text>
+                  <Text>{item.username}</Text>
                   </Left>
                     <Right>
                     <Text>0{item.phonenumber}</Text>
@@ -56,64 +55,25 @@ export default class subscribe extends React.Component {
     }
     async subscribe() {
         try {
-           
-            var apiToken = await AsyncStorage.getItem('apiToken');
-            this.setState({apiToken:apiToken})
-            let api_t=apiToken;
-            console.log(apiToken);
-            // alert(apiToken+'s')
-            // return apiToken== null
-            //     ?  await alert('null')
-            //     : await this.setState({
-            //       an:apiToken
-                  
-            //     });
-      
-            let response = await fetch('http://192.168.157.2:8000/api/v1/subscribe', {
+            let response, json, apiToken = await AsyncStorage.getItem('apiToken');
+            await this.setState({apiToken : apiToken})
+             response = await fetch('http://192.168.157.2:8000/api/v1/subscribe', {
                 method : 'POST',
                 headers : {
                     'Accept' : 'application/json',
                     'Content-Type' : 'application/json'
                 },
                 body : JSON.stringify({
-                    api_token:api_t
+                    api_token : apiToken
                 })
             });
-           
-            let json = await response.json();
-            console.log(json);
-            console.log(json.data);
-            console.log(json.data.data);
-            if(json.code==200){
-                this.setState({subscribe:json.data})
-                console.log('json.data');
-            }
-            if(json.code==422){
-                Actions.lightbox({show:16})
-            }
+             json = await response.json();
+            if(json.code == 200)
+                this.setState({subscribe : json.data, showSpiner : false})
+            if(json.code == 422)
+                Actions.lightbox({show : 16})
         } catch(error) {
             console.log(error);
         }
       }
-      async print() {
-        try {
-            let apiToken = await AsyncStorage.getItem('apiToken');
-            this.setState({apiToken:apiToken})
-            // console.log('s'+apiToken);
-            // this.setState({an:apiToken});
-            // this.get_wallet(apiToken);
-            // alert(apiToken)
-            return apiToken== null
-                ?  await alert('null')
-                : await this.setState({
-                  an:apiToken
-                  
-                });
-                console.log('2'+apiToken);
-                console.log('3'+an);
-               
-        } catch(error) {
-            console.log(error)
-        }
-    }
 }

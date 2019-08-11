@@ -14,7 +14,6 @@ import wallet from './wallet';
 import DrawerLayout from './DrawerLayout'; 
 import unique_code from './unique_code'; 
 import subscribe from './subscribe';  
-import as from './as'; 
 import lightbox from './lightbox'; 
 import professionnal_Search from './professionnal_Search';
 import test from './test';
@@ -39,7 +38,6 @@ export default class App extends Component {
                       <Scene key = 'wallet' component = {wallet}/> 
                       <Scene key = 'unique_code' component = {unique_code}/>  
                       <Scene key = 'subscribe' component = {subscribe}/> 
-                      <Scene key = 'as' component = {as}/> 
                       <Scene key = 'showCenter' component = {showCenter}/>
                       <Scene key = 'wv' component = {wv}/> 
                       <Scene key = 'professionnal_Search' component = {professionnal_Search}/> 

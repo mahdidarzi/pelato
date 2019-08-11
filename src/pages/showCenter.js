@@ -46,7 +46,7 @@ export default class showCenter extends React.Component {
               </View>:null}
                   <FlatList
                     data = {this.state.goodestCenters}
-                    ListEmptyComponent ={ () =>this.state.showSpiner == 0 ?<Spinner/>  : null}
+                    ListEmptyComponent ={() => <Spinner/>}
                     ListFooterComponent = {this.state.loading?null:< Spinner />}
                     refreshing = {this.state.refreshing}
                     onRefresh = {this.handleRefresh.bind(this)}
