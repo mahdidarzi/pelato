@@ -1,82 +1,40 @@
 import React from 'react';
-import { StatusBar ,AsyncStorage ,Image,StyleSheet,View,} from 'react-native';
-import { Container , Spinner, Text, } from 'native-base';
-import { Actions } from 'react-native-router-flux';
-// import { Actions } from './../assets/image/splash.jpg';
-
-
+import {StatusBar, AsyncStorage, Image, StyleSheet,ActivityIndicator, View} from 'react-native';
+import {Actions} from 'react-native-router-flux';
 export default class splash extends React.Component {
-    componentWillMount() {
-
-// AsyncStorage.removeItem('apiToken');
-
-        this.CheckUserLogin().then(status => {
-            if(status) {
-                Actions.jump('showCenter');
-            } else {
-                // Actions.reset('register');
-                Actions.replace('login2');
-
-            }
-        });
-
+    componentDidMount() {
+        this.checkapiToken()
     }
-
     render() {
-        
         return (
-            <Container  style={{justifyContent:'center',alignItems:'center',backgroundColor:'#ffa801'}}>
-                <StatusBar backgroundColor="#2c3e50" barStyle="light-content"/>
-                {/* #ffa502 */}
-                {/* backgroundColor:'#ffa801' */}
-              
-
-               
-          
-
-        <Image source={require('./../assets/image/splash.jpg')}  style={styles.backgroundImage}/>
-
-  <Spinner color='green' />
-  
-   
-            </Container>
+            <View  style = {styles.container}>
+                <StatusBar hidden/>
+                <Image source = {require('./../assets/image/splash.jpg')} style = {styles.backgroundImage}/>
+                <ActivityIndicator color = 'green' size = 'large' />
+            </View>
         )
     }
-
-    async CheckUserLogin() {
+    async checkapiToken() {
+        //check that user registered in app
         try {
             let apiToken = await AsyncStorage.getItem('apiToken');
-            return apiToken === null
-                ? false
-                : await this.CheckUserLoginFromApi(apiToken);
+            (apiToken != null) ?  Actions.jump('showCenter') : Actions.jump('showCenter');
         } catch(error) {
             console.log(error)
         }
     }
-
-    async CheckUserLoginFromApi(apiToken) {
-        try {
-            let response = await fetch(`http://192.168.157.2:8000/api/v1/user?api_token=${apiToken}`);
-            return response.status === 200;
-        } catch(error) {
-            console.log(error);
-        }
-    }
 }
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
-        flexDirection: 'column',
+    container : {
+        flex : 1,
+        justifyContent : 'center',
+        alignItems : 'center',
+        backgroundColor : '#ffa801',
    },
-        backgroundImage:{
-        width:300,
-        height:200,
-        backgroundColor: '#F5FCFF',
-        marginBottom:45
-        // flex: 1,
-        // resizeMode: 'stretch',
+        backgroundImage : {
+        width : 300,
+        height : 200,
+        backgroundColor : '#F5FCFF',
+        marginBottom : 45
       }
 });
