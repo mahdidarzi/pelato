@@ -1,5 +1,5 @@
 import React from 'react';
-import {AsyncStorage} from 'react-native';
+import {AsyncStorage,StyleSheet} from 'react-native';
 import { Button, Text ,Icon,Content,FooterTab,Footer,Container} from 'native-base';
 import {Actions} from 'react-native-router-flux';
 import lightBoxStyle from '../assets/styles/lightBoxStyle'
@@ -118,9 +118,9 @@ _show_date2(){
         }
       }
 }
-const styles = StyleSheet({
+const styles = StyleSheet.create({
     container : {
-        width : 330 ,
+     width : 330 ,
      height : 270,
      justifyContent : 'center',
      alignItems : 'center',
