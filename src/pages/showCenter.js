@@ -67,7 +67,7 @@ export default class showCenter extends React.Component {
                       <Text>جستجوی پیشرفته</Text>
                     </Button>
                     <Button style = {{backgroundColor : simpOrGodCenter == 'simpleCenter' ? 'cyan' : 'null'}} 
-                    onPress = { simpOrGodCenter == 'simpleCenter' ? null: ()=>Actions.home()}>
+                    onPress = { simpOrGodCenter == 'simpleCenter' ? null: ()=>Actions.pelatoList()}>
                       <Text style = {{fontSize:16, color : simpOrGodCenter == 'simpleCenter' ? 'black' : 'white'}}>مراکز</Text>
                     </Button>
                     <Button>
@@ -172,7 +172,7 @@ export default class showCenter extends React.Component {
         }
     }
     handleBackButton() {
-      this.props.simpOrGodCenter == 'simpleCenter' ? Actions.reset('home') : null;
+      this.props.simpOrGodCenter == 'simpleCenter' ? Actions.reset('pelatoList') : null;
       if(Actions.currentScene == 'showCenter') {
         if (this.backBtnCount == 1) 
           BackHandler.exitApp();

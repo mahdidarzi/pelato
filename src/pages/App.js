@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import  register  from './register';
 import  login  from './login';
 import  login2  from './login2';
-import  home  from './home';
+import  pelatoList  from './pelatoList';
 import splash from './splash';
 import rooms from './rooms';
 import date from './date';
@@ -31,7 +31,7 @@ export default class App extends Component {
                       <Scene key ='login2' component = {login2}/>
                       <Scene key = 'register' component = {register}/>
                       <Scene key = 'login' component = {login}/>
-                      <Scene key = 'home' component = {home}/>
+                      <Scene key = 'pelatoList' component = {pelatoList}/>
                       <Scene key = 'rooms' component = {rooms}/>
                       <Scene key = 'date' component = {date}/>
                       <Scene key = 'factor' component = {factor}/>
