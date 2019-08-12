@@ -24,6 +24,7 @@ export default class showCenter extends React.Component {
         BackHandler.addEventListener('hardwareBackPress', this.onHandleBackButton);
       }
     render() {
+      const {simpOrGodCenter,  } = this.props;
         return (
             <Container style = {centersStyles.containerbackground}>
                 <Header style = {headerStyles.headersbackground} androidStatusBarColor = "#2c3e50" iosBarStyle = "light-content">
@@ -40,7 +41,7 @@ export default class showCenter extends React.Component {
                       </View>
                     </Left> 
                 </Header>
-                {this.props.simpOrGodCenter != 'simpleCenter' ? 
+                {simpOrGodCenter != 'simpleCenter' ? 
                 <View style = {centersStyles.goodestCenterBox}>
                 <Text style = {centersStyles.goodestCenterBoxsText}>برترین مراکز</Text>
               </View>:null}
@@ -56,16 +57,18 @@ export default class showCenter extends React.Component {
                     renderItem={this.flatRenItem}
                   />
                  <Footer >
-                  <FooterTab style = {{ backgroundColor : '#34495e'}}>
-                    <Button style = {{ backgroundColor : 'cyan'}} >
-                      <Text style = {{fontSize:15,color:'black',}}>بهترین</Text>
-                      <Text style = {{fontSize:15,color:'black',marginTop:2}}>مراکز</Text>
+                  <FooterTab style = {{backgroundColor : '#34495e'}}>
+                    <Button style = {{backgroundColor : simpOrGodCenter != 'simpleCenter' ? 'cyan' : 'null'}} 
+                    onPress = {simpOrGodCenter != 'simpleCenter' ? null: ()=>Actions.showCenter()} >
+                      <Text note style = {{fontSize:15,color: simpOrGodCenter != 'simpleCenter' ? 'black' : 'white'}}>بهترین</Text>
+                      <Text note style = {{fontSize:15,color: simpOrGodCenter != 'simpleCenter' ? 'black' : 'white',marginTop:2}}>مراکز</Text>
                     </Button>
                     <Button>
                       <Text>جستجوی پیشرفته</Text>
                     </Button>
-                    <Button onPress = {()=>Actions.home()}>
-                      <Text style = {{fontSize:16}}>مراکز</Text>
+                    <Button style = {{backgroundColor : simpOrGodCenter == 'simpleCenter' ? 'cyan' : 'null'}} 
+                    onPress = { simpOrGodCenter == 'simpleCenter' ? null: ()=>Actions.home()}>
+                      <Text style = {{fontSize:16, color : simpOrGodCenter == 'simpleCenter' ? 'black' : 'white'}}>مراکز</Text>
                     </Button>
                     <Button>
                       <Text onPress = {()=>Actions.wallet()} style = {{fontSize:16}}>کیف پول</Text>
@@ -169,6 +172,7 @@ export default class showCenter extends React.Component {
         }
     }
     handleBackButton() {
+      this.props.simpOrGodCenter == 'simpleCenter' ? Actions.reset('home') : null;
       if(Actions.currentScene == 'showCenter') {
         if (this.backBtnCount == 1) 
           BackHandler.exitApp();
