@@ -46,7 +46,7 @@ export default class showCenter extends React.Component {
               </View>:null}
                   <FlatList
                     data = {this.state.goodestCenters}
-                    ListEmptyComponent ={() => <Spinner/>}
+                    ListEmptyComponent = {() => <Spinner/>}
                     ListFooterComponent = {this.state.loading?null:< Spinner />}
                     refreshing = {this.state.refreshing}
                     onRefresh = {this.handleRefresh.bind(this)}
@@ -169,7 +169,7 @@ export default class showCenter extends React.Component {
         }
     }
     handleBackButton() {
-      if(Actions.currentScene == 'goodest_centers') {
+      if(Actions.currentScene == 'showCenter') {
         if (this.backBtnCount == 1) 
           BackHandler.exitApp();
       else if (this.backBtnCount == 0) {
