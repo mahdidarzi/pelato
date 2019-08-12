@@ -9,7 +9,7 @@ export default class showCenter extends React.Component {
     constructor(props) {
         super(props);
         this.backBtnCount = 0;//q
-        this.onHandleBackButton = this.handleBackButton.bind(this);//q
+        this.onhandleAndroidBackBtn = this.handleAndroidBackBtn.bind(this);//q
         this.state = {
             goodestCenters : [],
             page : 1,
@@ -21,7 +21,7 @@ export default class showCenter extends React.Component {
     }
      componentDidMount() {
         this.getCentersRequest((goodestCenters) => {console.log(['getCentersRequest:done',goodestCenters]) });
-        BackHandler.addEventListener('hardwareBackPress', this.onHandleBackButton);
+        BackHandler.addEventListener('hardwareBackPress', this.onhandleAndroidBackBtn);
       }
     render() {
       const {simpOrGodCenter,  } = this.props;
@@ -171,7 +171,7 @@ export default class showCenter extends React.Component {
             console.log(err)
         }
     }
-    handleBackButton() {
+    handleAndroidBackBtn() {
       this.props.simpOrGodCenter == 'simpleCenter' ? Actions.reset('pelatoList') : null;
       if(Actions.currentScene == 'showCenter') {
         if (this.backBtnCount == 1) 

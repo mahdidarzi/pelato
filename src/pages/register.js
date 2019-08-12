@@ -3,28 +3,13 @@ import {
     StyleSheet,
     Text,
     View,
-    Animated,
-   
     TextInput,
     TouchableOpacity,
-    Image,
-    ImageBackground,
-    StatusBar
-    
-} from 'react-native';
  
+} from 'react-native';
 import { Actions } from "react-native-router-flux";
-import Background from './../assets/image/2.jpg';
 import LinearGradient from 'react-native-linear-gradient';
 import { Thumbnail } from 'native-base';
-
-
-
-
-
-
-
-
 export default class login extends Component {
     constructor (){
         super();
@@ -35,16 +20,9 @@ export default class login extends Component {
             off:'',
         }
     }
-
     register=()=>{
         const {name,phonenumber,username,off}=this.state;
         const count=username.valueOf();
-
-      
-      
-
-        
-      
         if(  phonenumber.valueOf()!==''&& username.valueOf()!=='')  {
 
           let  response= fetch('http://192.168.157.2:8000/api/v1/register',{
@@ -70,16 +48,6 @@ export default class login extends Component {
             Actions.replace('login');
         
         }
-     else if(( phonenumber.valueOf()===''|username.valueOf()==='')  ) {
-            // alert  ('لطفا تمام فیلد ها را پر کنید')
-            Actions.lightbox({show:2})
-                    }
-
-                    
-    
-       
-       
-  
 }
 
 async registertest() {
@@ -106,7 +74,7 @@ async registertest() {
     // console.log(j);
     // console.log(j.errors.phonenumber);
     if(json.code==122) {
-        Actions.lightbox({show:8})
+        Actions.lightbox({content : content1})
     }
     if(json.code== 200) {
         console.log('200')
@@ -114,14 +82,14 @@ async registertest() {
     }
 
     if( phonenumber.valueOf()=='' && username.valueOf()==''){ 
-        Actions.lightbox({show:3})
+        Actions.lightbox({content : content2})
     }
     if( phonenumber.valueOf()=='' && username.valueOf()!=''){ 
-        Actions.lightbox({show:4})
+        Actions.lightbox({content : content2})
     }
 
     if( username.valueOf()=='' && phonenumber.valueOf()!=''){ 
-        Actions.lightbox({show:5})
+        Actions.lightbox({content : content3})
     }
 
     if( phonenumber.length>=1 && phonenumber.length<= 11 )
@@ -129,7 +97,7 @@ async registertest() {
     {
         
           if(response.status === 422 && phonenumber.valueOf()!='' && username.valueOf()!='' ){
-        Actions.lightbox({show:6})
+            Actions.lightbox({content : content4})  
         }
     }
         // if(response.status === 422 && phonenumber.valueOf()!='' && username.valueOf()!='' ){  
@@ -140,7 +108,7 @@ async registertest() {
         //     }
       
         if( phonenumber.length<=10 && phonenumber.valueOf()!=''){
-Actions.lightbox({show:7})
+            Actions.lightbox({content : content5})  
         }
   
     // var json = await response.json();
@@ -162,6 +130,11 @@ Actions.lightbox({show:7})
 }
 
     render() {
+        let content1 = 'کد معرف شما صحیح نمی باشد',
+        content2 = 'لطفا تمام فیلد ها را پر کنید',
+        content3 = ' لطفا فیلد نام کاربری را پر کنید',
+        content4 = 'این شماره قبلا در سیسیتم ثبت شده است',
+        content5 = 'فیلد شماره تلفن باید 11 رقم باشد';
         return (
         //     <View style={styles.container}>
         //     <StatusBar hidden />

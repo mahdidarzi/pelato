@@ -3,7 +3,6 @@ import { AsyncStorage } from 'react-native';
 import { Container , Header , View , Text , Left , Button , Right , Content , Form , Item , Icon , Input } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { form } from './../assets/styles';
-
 export default class Login extends React.Component {
     componentWillMount() {
         this.state = {

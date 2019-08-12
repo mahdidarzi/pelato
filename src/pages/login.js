@@ -39,6 +39,9 @@ export default class login extends Component {
 
    
     render() {
+        let
+         content1 = 'لطفا کد تایید را صحیح وارد نمایید',
+         content2 = 'لطفا کد تایید را وارد نمایید';
         return (
 <LinearGradient colors={['#dff9fb','#dff9fb','#d1ccc0','#ffda79','#ffda79','#f6b93b', '#f6b93b', '#ffa502','#FFC312','#FFC312']} style={styles.gradiant}>
             <View style={styles.container}>
@@ -93,13 +96,13 @@ export default class login extends Component {
                 await this.setDataUser(json.data[0].api_token)
             }
 
-            if(json.code === 422) {
-                Actions.lightbox({show:9})
+            if(json.code == 422) {
+                Actions.lightbox({content : content1})
             }
 
-            if(response.status === 422 && api_token=='') {
+            if(response.status == 422 && api_token=='') {
                 // Validate
-                Actions.lightbox({show:10})
+                Actions.lightbox({content : content2})
             }
 
 

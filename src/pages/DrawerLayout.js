@@ -4,6 +4,11 @@ import {StyleSheet} from "react-native";
 import {Actions} from 'react-native-router-flux';
 export default class DrawerLayout extends React.Component {
     render() {
+        let 
+        topic1 = '*درباره ما*' ,
+        content1 = 'ما مجموعه شاد که می خوایم فقط برنامه نویسی کنیم',
+        topic2 = '*پشتیبانی*' ,
+        content2 = '*09013235579*';
         return (
             <Container style={{backgroundColor : '#2d3436'}}>
                 <View>
@@ -22,7 +27,7 @@ export default class DrawerLayout extends React.Component {
                     <Item  onPress={() => Actions.home()}>
                         <Text style={{color : 'white'}}>مراکز</Text>
                     </Item>
-                    <Item  onPress={() => Actions.lightbox({show : 1})}>
+                    <Item  onPress={() => Actions.lightbox({topic : topic1,content : content1})}>
                         <Text style={{color : 'white'}}>درباره ما</Text>
                     </Item>
                     <Item  onPress={() => Actions.wallet()}>
@@ -37,7 +42,7 @@ export default class DrawerLayout extends React.Component {
                     <Item  onPress={() => Actions.subscribe()}>
                         <Text style={{color : 'white'}}>زیر مجموعه</Text>
                     </Item>
-                    <Item  onPress={() => Actions.lightbox({show : 2})}>
+                    <Item  onPress={() => Actions.lightbox({topic : topic2,content : content2})}>
                         <Text style={{color : 'white'}}>پشتیبانی</Text>
                         
                     </Item>

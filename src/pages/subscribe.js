@@ -17,6 +17,7 @@ export default class subscribe extends React.Component {
     }
     render() {
         const {subscribe} = this.state;
+        let content = 'کاربر عزیز هیچ زیر مجموعه ای برای شما وجود ندارد';
         return (
             <Container style = {{ backgroundColor : '#2d3436'}}>
                 <Header   style = {headerStyles.headersbackground} androidStatusBarColor = "#2c3e50" iosBarStyle = "light-content">
@@ -71,7 +72,7 @@ export default class subscribe extends React.Component {
             if(json.code == 200)
                 this.setState({subscribe : json.data, showSpiner : false})
             if(json.code == 422)
-                Actions.lightbox({show : 16})
+                Actions.lightbox({content : content})
         } catch(error) {
             console.log(error);
         }

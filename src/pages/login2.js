@@ -39,6 +39,10 @@ export default class login2 extends Component {
 
    
     render() {
+        let content1 = 'لطفا شماره تلفن خود را صحیح وارد کنید',
+        content2 = 'لطفا به بخش ثبت نام مراجه کنید',
+        content3 = 'لطفا فیلد شماره تلفن را پر کنید',
+        content4 = 'لطفا به بخش ثبت نام مراجه کنید';
         return (
 <LinearGradient colors={['#dff9fb','#dff9fb','#d1ccc0','#ffda79','#ffda79','#f6b93b', '#f6b93b', '#ffa502','#FFC312','#FFC312']} style={styles.gradiant}>
             <View style={styles.container}>
@@ -112,10 +116,10 @@ export default class login2 extends Component {
 // }
 
 if(json.code==423){
-    Actions.lightbox({show:13})
+    Actions.lightbox({content : content1})
 }
 if(json.code==201){
-    Actions.lightbox({show:12})
+    Actions.lightbox({content :content2 })
 }
 
 
@@ -123,7 +127,7 @@ if(json.code==201){
            
             if(json.code === 422) {
                 // Validate
-                Actions.lightbox({show:13})
+                Actions.lightbox({content : content1})
             }
             
             // if(response.status === 422) {
@@ -133,11 +137,11 @@ if(json.code==201){
 
             if(response.status === 422 && phonenumber=='') {
                 // Validate
-                Actions.lightbox({show:4})
+                Actions.lightbox({content : content3})
             }
             if(response.status === 422 && phonenumber.length==11) {
                 // Validate
-                Actions.lightbox({show:12})
+                Actions.lightbox({content : content4})
             }
 
 
