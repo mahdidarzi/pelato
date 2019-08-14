@@ -10,7 +10,7 @@ import {
 import { Actions } from "react-native-router-flux";
 import LinearGradient from 'react-native-linear-gradient';
 import { Thumbnail } from 'native-base';
-export default class login extends Component {
+export default class register extends Component {
     constructor (){
         super();
         this.state={
@@ -45,7 +45,7 @@ export default class login extends Component {
             
             });
             console.log(response.status);
-            Actions.replace('login');
+            Actions.replace('confirmAuthorCode');
         
         }
 }
@@ -78,7 +78,7 @@ async registertest() {
     }
     if(json.code== 200) {
         console.log('200')
-        Actions.replace('login');
+        Actions.replace('confirmAuthorCode');
     }
 
     if( phonenumber.valueOf()=='' && username.valueOf()==''){ 

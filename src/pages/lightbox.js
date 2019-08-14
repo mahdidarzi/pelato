@@ -1,6 +1,6 @@
 import React from 'react';
 import {AsyncStorage,StyleSheet} from 'react-native';
-import { Button, Text ,Icon,Content,FooterTab,Footer,Container} from 'native-base';
+import { Button, Text ,Icon,Content,FooterTab,Footer,Container,View} from 'native-base';
 import {Actions} from 'react-native-router-flux';
 import lightBoxStyle from '../assets/styles/lightBoxStyle'
 const PersianCalendarPicker = require('react-native-persian-calendar-picker');
