@@ -110,7 +110,7 @@ _show_date2(){
             console.log(json);
             if(json.code == 200){
                 AsyncStorage.removeItem('apiToken');
-                Actions.replace('login2');
+                Actions.replace('loginPage');
                 Actions.lightbox({show : 15})
             }
         } catch(error) {

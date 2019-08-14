@@ -15,7 +15,7 @@ export default class register extends Component {
     }
 async registerUser() {
     try {
-        let {phonenumber,username,off } = this.state;
+        let {phonenumber,username,off} = this.state;
         let json, response = await fetch('http://192.168.157.2:8000/api/v1/register', {
             method : 'POST',
             headers : {

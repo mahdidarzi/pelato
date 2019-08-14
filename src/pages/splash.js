@@ -18,7 +18,7 @@ export default class splash extends React.Component {
         //check that user registered in app
         try {
             let apiToken = await AsyncStorage.getItem('apiToken');
-            (apiToken != null) ?  Actions.showCenter({simpOrGodCenter:'goodestCenters'}) : Actions.jump('login2');
+            (apiToken != null) ?  Actions.showCenter({simpOrGodCenter:'goodestCenters'}) : Actions.jump('loginPage');
         } catch(error) {
             console.log(error)
         }

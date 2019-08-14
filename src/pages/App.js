@@ -2,7 +2,7 @@ import { Router, Scene,Drawer} from 'react-native-router-flux';
 import React, {Component} from 'react';
 import  register  from './register';
 import  confirmAuthorCode  from './confirmAuthorCode';
-import  login2  from './login2';
+import  loginPage  from './loginPage';
 import  pelatoList  from './pelatoList';
 import splash from './splash';
 import rooms from './rooms';
@@ -28,7 +28,7 @@ export default class App extends Component {
                   <Scene key = 'root' modal hideNavBar>
                       <Scene key = 'splash' component = {splash} />
                       <Scene key = 'test' component = {test}/>
-                      <Scene key = 'login2' component = {login2}/>
+                      <Scene key = 'loginPage' component = {loginPage}/>
                       <Scene key = 'register' component = {register}/>
                       <Scene key = 'confirmAuthorCode' component = {confirmAuthorCode} initial/>
                       <Scene key = 'pelatoList' component = {pelatoList}/>
