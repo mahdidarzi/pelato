@@ -1,5 +1,5 @@
 import {StyleSheet}  from 'react-native';
-export default  confirmAuthorCodeStlyes = StyleSheet.create({
+export default  inputesAndBtnsStyles = StyleSheet.create({
     container : {
         flex :  1,
         justifyContent : 'center',

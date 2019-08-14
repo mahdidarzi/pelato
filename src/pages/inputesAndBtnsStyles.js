@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Text,View,TextInput,TouchableOpacity,AsyncStorage} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import LinearGradient from 'react-native-linear-gradient';
-import confirmAuthorCodeStlyes from '../assets/styles/confirmAuthorCodeStlyes';
+import inputesAndBtnsStyles from '../assets/styles/confirmAuthorCodeStlyes';
 export default class confirmAuthorCode extends Component {
     constructor (){
         super();
@@ -17,16 +17,16 @@ export default class confirmAuthorCode extends Component {
         return (
             <LinearGradient
              colors = {['#dff9fb','#dff9fb','#d1ccc0','#ffda79','#ffda79','#f6b93b', '#f6b93b', '#ffa502','#FFC312','#FFC312']}
-             style = {confirmAuthorCodeStlyes.gradiant}>
-                <View style = {confirmAuthorCodeStlyes.container}>
+             style = {inputesAndBtnsStyles.gradiant}>
+                <View style = {inputesAndBtnsStyles.container}>
                             <TextInput 
                             placeholder = '    کد تایید'
-                            style = {confirmAuthorCodeStlyes.textinput}
+                            style = {inputesAndBtnsStyles.textinput}
                             onChangeText = {(apiToken) => this.setState({apiToken})}/>
-                            <TouchableOpacity onPress = {this.checkAuthenticationcode.bind(this)} style = {confirmAuthorCodeStlyes.buttonView}>
+                            <TouchableOpacity onPress = {this.checkAuthenticationcode.bind(this)} style = {inputesAndBtnsStyles.buttonView}>
                                 <Text style = {{color :  '#fff',alignItems : 'center',fontSize : 20}}>ورود</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress = {this.checkAuthenticationcode.bind(this)} style = {confirmAuthorCodeStlyes.buttonView}>
+                            <TouchableOpacity onPress = {this.checkAuthenticationcode.bind(this)} style = {inputesAndBtnsStyles.buttonView}>
                                 <Text style = {{color :  '#fff',alignItems : 'center',fontSize : 20}}>ارسال مجدد کد تایید</Text>
                             </TouchableOpacity>
                 </View>
