@@ -23,14 +23,14 @@ export default class App extends Component {
      <Router>
              <Drawer
               contentComponent = {DrawerLayout}
-              drawerPosition = 'right' >        
+              drawerPosition = 'right'>        
               <Scene key='lightBox'  lightbox>
                   <Scene key = 'root' modal hideNavBar>
-                      <Scene key = 'splash' component = {splash} />
+                      <Scene key = 'splash' component = {splash} initial/>
                       <Scene key = 'test' component = {test}/>
                       <Scene key = 'loginPage' component = {loginPage}/>
                       <Scene key = 'register' component = {register}/>
-                      <Scene key = 'confirmAuthorCode' component = {confirmAuthorCode} initial/>
+                      <Scene key = 'confirmAuthorCode' component = {confirmAuthorCode} />
                       <Scene key = 'pelatoList' component = {pelatoList}/>
                       <Scene key = 'rooms' component = {rooms}/>
                       <Scene key = 'date' component = {date}/>

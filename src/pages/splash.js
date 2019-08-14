@@ -3,6 +3,7 @@ import {StatusBar, AsyncStorage, Image, StyleSheet,ActivityIndicator, View} from
 import {Actions} from 'react-native-router-flux';
 export default class splash extends React.Component {
     componentDidMount() {
+        // AsyncStorage.removeItem('apiToken');
         this.checkapiToken()
     }
     render() {

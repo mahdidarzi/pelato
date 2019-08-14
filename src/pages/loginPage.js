@@ -11,10 +11,6 @@ export default class loginPage extends Component {
         }
     }
     render() {
-        let content1 = 'لطفا شماره تلفن خود را صحیح وارد کنید',
-        content2 = 'لطفا به بخش ثبت نام مراجه کنید',
-        content3 = 'لطفا فیلد شماره تلفن را پر کنید',
-        content4 = 'لطفا به بخش ثبت نام مراجه کنید';
         return (
             <LinearGradient
              colors = {['#dff9fb','#dff9fb','#d1ccc0','#ffda79','#ffda79','#f6b93b', '#f6b93b', '#ffa502','#FFC312','#FFC312']}
@@ -36,6 +32,10 @@ export default class loginPage extends Component {
     }
     async requrestLoginFromApi() {
         try {
+            let content1 = 'لطفا شماره تلفن خود را صحیح وارد کنید',
+            content2 = 'لطفا به بخش ثبت نام مراجه کنید',
+            content3 = 'لطفا فیلد شماره تلفن را پر کنید',
+            content4 = 'لطفا به بخش ثبت نام مراجه کنید';
             let {phonenumber} = this.state;
             let response = await fetch('http://192.168.157.2:8000/api/v1/login2', {
                 method : 'POST',
@@ -48,9 +48,10 @@ export default class loginPage extends Component {
                 })
             });
             let json = await response.json();
+            console.log(json);
             if(json.code == 200){
-                await this.setDataUser(json.data[0].api_token)
-                Actions.replace('home');
+                await this.setDataUser(json.data[0].api_token);
+                Actions.replace('pelatoList');
             }
             if(json.code == 423){
                 Actions.lightbox({content : content1})

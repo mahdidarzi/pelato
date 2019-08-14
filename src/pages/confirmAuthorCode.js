@@ -11,9 +11,6 @@ export default class confirmAuthorCode extends Component {
         }
     }
     render() {
-        let
-         content1 = 'لطفا کد تایید را صحیح وارد نمایید',
-         content2 = 'لطفا کد تایید را وارد نمایید';
         return (
             <LinearGradient
              colors = {['#dff9fb','#dff9fb','#d1ccc0','#ffda79','#ffda79','#f6b93b', '#f6b93b', '#ffa502','#FFC312','#FFC312']}
@@ -36,6 +33,9 @@ export default class confirmAuthorCode extends Component {
     async checkAuthenticationcode() {
         try {
             const {apiToken} = this.state;
+            let
+            content1 = 'لطفا کد تایید را صحیح وارد نمایید',
+            content2 = 'لطفا کد تایید را وارد نمایید';
             let json, response = await fetch('http://192.168.157.2:8000/api/v1/login', {
                 method : 'POST',
                 headers : {
@@ -47,6 +47,7 @@ export default class confirmAuthorCode extends Component {
                 })
             });
             json = await response.json();
+            console.log(json);
             if(json.code == 200) {
                 await this.setToken(json.data[0].api_token)
             }

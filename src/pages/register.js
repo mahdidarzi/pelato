@@ -15,6 +15,11 @@ export default class register extends Component {
     }
 async registerUser() {
     try {
+        let content1 = 'کد معرف شما صحیح نمی باشد',
+        content2 = 'لطفا تمام فیلد ها را پر کنید',
+        content3 = ' لطفا فیلد نام کاربری را پر کنید',
+        content4 = 'این شماره قبلا در سیسیتم ثبت شده است',
+        content5 = 'فیلد شماره تلفن باید 11 رقم باشد';
         let {phonenumber,username,off} = this.state;
         let json, response = await fetch('http://192.168.157.2:8000/api/v1/register', {
             method : 'POST',
@@ -58,11 +63,6 @@ async registerUser() {
     }
 }
     render() {
-        let content1 = 'کد معرف شما صحیح نمی باشد',
-        content2 = 'لطفا تمام فیلد ها را پر کنید',
-        content3 = ' لطفا فیلد نام کاربری را پر کنید',
-        content4 = 'این شماره قبلا در سیسیتم ثبت شده است',
-        content5 = 'فیلد شماره تلفن باید 11 رقم باشد';
         return (
             <LinearGradient 
             colors = {['#dff9fb','#dff9fb','#d1ccc0','#ffda79','#ffda79','#f6b93b', '#f6b93b', '#ffa502','#FFC312','#FFC312']}
