@@ -10,7 +10,7 @@
     "@babel/runtime": "^7.1.5",
     "native-base": "^2.8.1",
     "react": "16.6.0-alpha.8af6728",
-    "react-native": "0.57.4",
+    "react-native": "0.70.2",
     "react-native-animated-form": "0.0.7",
     "react-native-image-slider": "^2.0.3",
     "react-native-linear-gradient": "^2.5.3",
